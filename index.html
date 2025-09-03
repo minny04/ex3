@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>User Registration Form</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h2>User Registration</h2>
+    <form id="registrationForm" action="register.php" method="POST">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" required />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+
+        <div class="gender-group">
+            <label>Gender:</label><br />
+            <input type="radio" id="male" name="gender" value="Male" />
+            <label for="male" class="radio-label">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" />
+            <label for="female" class="radio-label">Female</label>
+            <input type="radio" id="other" name="gender" value="Other" />
+            <label for="other" class="radio-label">Other</label>
+        </div>
+
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+            <option value="">--Select--</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <option value="India">India</option>
+            <option value="Canada">Canada</option>
+        </select>
+
+        <div class="checkbox">
+            <input type="checkbox" id="terms" name="terms" required />
+            <label for="terms" class="checkbox-label">I agree to the Terms and Conditions</label>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
