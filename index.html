@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>User Registration Form</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="container">
+    <form id="registerForm" class="card" novalidate>
+      <h1>Student Registration</h1>
 
-<div class="container">
-    <h2>User Registration</h2>
-    <form id="registrationForm" action="register.php" method="POST">
-        <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" name="fullname" required />
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required placeholder="Your full name">
+        <small class="error" id="nameError"></small>
+      </div>
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required />
+      <div class="field">
+        <label for="fatherName">Father's Name</label>
+        <input type="text" id="fatherName" required placeholder="Father's name">
+        <small class="error" id="fatherNameError"></small>
+      </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
+      <div class="field">
+        <label for="motherName">Mother's Name</label>
+        <input type="text" id="motherName" required placeholder="Mother's name">
+        <small class="error" id="motherNameError"></small>
+      </div>
 
-        <div class="gender-group">
-            <label>Gender:</label><br />
-            <input type="radio" id="male" name="gender" value="Male" />
-            <label for="male" class="radio-label">Male</label>
-            <input type="radio" id="female" name="gender" value="Female" />
-            <label for="female" class="radio-label">Female</label>
-            <input type="radio" id="other" name="gender" value="Other" />
-            <label for="other" class="radio-label">Other</label>
-        </div>
-
-        <label for="country">Country</label>
-        <select id="country" name="country" required>
-            <option value="">--Select--</option>
-            <option value="USA">USA</option>
-            <option value="UK">UK</option>
-            <option value="India">India</option>
-            <option value="Canada">Canada</option>
+      <div class="field">
+        <label for="education">Education</label>
+        <select id="education" required>
+          <option value="">-- Select Qualification --</option>
+          <option value="ssc">SSC / 10th</option>
+          <option value="inter">Intermediate / 12th</option>
+          <option value="diploma">Diploma</option>
+          <option value="ug">Undergraduate (B.Tech/B.Sc/B.A)</option>
+          <option value="pg">Postgraduate (M.Tech/M.Sc/M.A)</option>
         </select>
+        <small class="error" id="educationError"></small>
+      </div>
 
-        <div class="checkbox">
-            <input type="checkbox" id="terms" name="terms" required />
-            <label for="terms" class="checkbox-label">I agree to the Terms and Conditions</label>
-        </div>
+      <div class="field">
+        <label for="certificate">Upload Certificate (PDF, max 2MB)</label>
+        <input type="file" id="certificate" accept=".pdf" required>
+        <small class="error" id="certificateError"></small>
+      </div>
 
-        <button type="submit">Register</button>
+      <button type="submit" class="primary">Register</button>
+
+      <p class="success" id="formSuccess" hidden>✅ Registration successful!</p>
     </form>
-</div>
+  </main>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
