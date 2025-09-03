@@ -1,32 +1,46 @@
-document.getElementById("registrationForm").addEventListener("submit", function(e) {
-    const fullname = document.getElementById("fullname").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const gender = document.querySelector('input[name="gender"]:checked');
-    const country = document.getElementById("country").value;
-    const terms = document.getElementById("terms").checked;
+(function () {
+  const form = document.getElementById("registerForm");
+  const el = (id) => document.getElementById(id);
 
-    if (fullname === "" || email === "" || password === "" || !gender || country === "") {
-        alert("Please fill out all required fields.");
-        e.preventDefault();
-        return;
+  const setError = (id, msg) => { el(id).textContent = msg; };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    // Clear old errors
+    ["nameError","fatherNameError","motherNameError","educationError","certificateError"]
+      .forEach(id => setError(id, ""));
+
+    // Values
+    const name = el("name").value.trim();
+    const father = el("fatherName").value.trim();
+    const mother = el("motherName").value.trim();
+    const education = el("education").value;
+    const certificate = el("certificate").files[0];
+
+    // Validations
+    if (name.length < 2) { setError("nameError","Enter a valid name"); valid = false; }
+    if (father.length < 2) { setError("fatherNameError","Enter father's name"); valid = false; }
+    if (mother.length < 2) { setError("motherNameError","Enter mother's name"); valid = false; }
+    if (!education) { setError("educationError","Select education"); valid = false; }
+
+    if (!certificate) {
+      setError("certificateError","Upload your certificate");
+      valid = false;
+    } else {
+      if (certificate.type !== "application/pdf") {
+        setError("certificateError","Only PDF allowed");
+        valid = false;
+      }
+      if (certificate.size > 2 * 1024 * 1024) {
+        setError("certificateError","File must be under 2MB");
+        valid = false;
+      }
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        e.preventDefault();
-        return;
-    }
+    if (!valid) return;
 
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        e.preventDefault();
-        return;
-    }
-
-    if (!terms) {
-        alert("You must agree to the Terms and Conditions.");
-        e.preventDefault();
-    }
-});
+    el("formSuccess").hidden = false;
+  });
+})();
